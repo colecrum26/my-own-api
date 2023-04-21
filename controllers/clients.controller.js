@@ -1,4 +1,4 @@
-import query from "../db/utils";
+import query from "../db/utils.js";
 
 const findAll = async () => {
     return query("SELECT ClientID, ClientName, Industry, City, Country FROM clients");
