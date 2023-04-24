@@ -1,13 +1,13 @@
 import express from "express";
-import config from "../config/index.js";
-import router from "../routes/index.js";
+import config from "./config/index.js";
+import router from "./routes/index.js";
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/", router);
+app.use("/api", router);
 
 app.use((err, req, res, next) => {
     console.error(err);
