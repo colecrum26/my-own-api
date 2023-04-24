@@ -14,7 +14,11 @@ router.get("/:id?", async (req, res, next) => {
       data = await clients.findAll();
     }
     res.json(data);
-  } catch (error) {}
+  } catch (error) {
+    if (!id) {
+        console.error("Not an id.")
+    }
+  }
 });
 
 router.post("/", async (req, res, next) => {
@@ -28,10 +32,15 @@ router.post("/", async (req, res, next) => {
 });
 
 router.put("/:id", async (req, res, next) => {
-  let { id } = req.params;
-  let clientDTO = req.body;
-  let data = await employees.updateOne(id, clientDTO);
-  res.json(data);
+  try {
+    let { id } = req.params;
+    let clientDTO = req.body;
+    let data = await clients.updateOne(id, clientDTO);
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
 });
 
 router.delete("/:id", async (req, res, next) => {
