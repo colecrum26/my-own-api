@@ -6,7 +6,6 @@ const router = express.Router();
 router.get("/:id?", async (req, res, next) => {
   let { id } = req.params;
   let data;
-
   try {
     if (id) {
       data = await clients.findOne(id);
@@ -14,11 +13,9 @@ router.get("/:id?", async (req, res, next) => {
       data = await clients.findAll();
     }
     res.json(data);
-  } catch (error) {
-    if (!id) {
-        console.error("Not an id.")
+  } catch (err) {
+      console.error(err)
     }
-  }
 });
 
 router.post("/", async (req, res, next) => {
@@ -26,8 +23,8 @@ router.post("/", async (req, res, next) => {
     let clientDTO = req.body;
     let data = await clients.addOne(clientDTO);
     res.json(data);
-  } catch (error) {
-    console.error("Check your body.")
+  } catch (err) {
+    console.error(err)
   }
 });
 
@@ -39,14 +36,17 @@ router.put("/:id", async (req, res, next) => {
     res.json(data);
   } catch (err) {
     console.error(err);
-    res.status(500).send(err);
   }
 });
 
 router.delete("/:id", async (req, res, next) => {
-  let { id } = req.params;
-  let data = await clients.removeOne(id);
-  res.json(data);
+try {
+    let { id } = req.params;
+    let data = await clients.removeOne(id);
+    res.json(data);
+} catch (err) {
+  console.error(err)
+}
 });
 
 export default router;
