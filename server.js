@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import config from "./config/index.js";
 import router from "./routes/index.js";
-import { logger } from "./logger/log.js";
+import logger from "./logger/log.js";
 
 const app = express();
 

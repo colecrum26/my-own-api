@@ -1,4 +1,4 @@
-const { query } = require("../db/index")
+import query from "../db/utils.js"
 
 const logger = async (req, res, next) => {
     const time = new Date().toLocaleString();
@@ -24,6 +24,4 @@ try {
 
 }; 
 
-module.exports = {
-    logger,
-};
+export default logger;
